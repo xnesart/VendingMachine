@@ -1,0 +1,6 @@
+/Users/homeland/RiderProjects/VendingMachine/VendingMachine/bin/Debug/VendingMachine.exe
+/Users/homeland/RiderProjects/VendingMachine/VendingMachine/bin/Debug/VendingMachine.pdb
+/Users/homeland/RiderProjects/VendingMachine/VendingMachine/obj/Debug/VendingMachine.csproj.AssemblyReference.cache
+/Users/homeland/RiderProjects/VendingMachine/VendingMachine/obj/Debug/VendingMachine.csproj.CoreCompileInputs.cache
+/Users/homeland/RiderProjects/VendingMachine/VendingMachine/obj/Debug/VendingMachine.exe
+/Users/homeland/RiderProjects/VendingMachine/VendingMachine/obj/Debug/VendingMachine.pdb
