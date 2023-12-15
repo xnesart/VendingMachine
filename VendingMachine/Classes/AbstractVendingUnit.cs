@@ -3,16 +3,18 @@ using System.Collections.Generic;
 
 namespace VendingMachine.Classes
 {
-    public class VendingUnit
+    public abstract class AbstractVendingUnit
     {
-        private decimal Balance { get; set; }
-        private List<Drink> Products { get; set; }
-        private double CountOfWater { get; set; }
-        private double CountOfCoffee { get; set; }
-        private double CountOfMilk { get; set; }
-        private int CountOfSugar { get; set; }
+        protected decimal Balance { get; set; }
+        protected List<Drink> Products { get; set; }
+        protected List<Snack> Snacks { get; set; }
+        protected double CountOfWater { get; set; }
+        protected double CountOfCoffee { get; set; }
+        protected double CountOfMilk { get; set; }
+        protected int CountOfSugar { get; set; }
+        protected decimal Income { get; set; }
 
-        public VendingUnit(double water, double milk, double coffee, int sugar)
+        public AbstractVendingUnit(double water, double milk, double coffee, int sugar)
         {
             Balance = 10;
             CountOfWater = water;
@@ -69,7 +71,7 @@ namespace VendingMachine.Classes
             int counter = 0;
             foreach (var drink in Products)
             {
-                Console.WriteLine($"Напиток под номером {counter + 1} это {drink.Name}");
+                Console.WriteLine($"Напиток #{counter + 1} это {drink.Name}, цена {drink.Price}");
                 counter++;
             }
         }
@@ -88,6 +90,21 @@ namespace VendingMachine.Classes
             Console.WriteLine($"Баланс на текущий момент = {Balance}");
         }
 
+        public decimal GetBalance()
+        {
+            return Balance;
+        }
+
+        public decimal GetIncome()
+        {
+            return Income;
+        }
+
+        public decimal CalculateIncome(decimal oldBalance, decimal oldIncome)
+        {
+            decimal newIncome = 0;
+            return newIncome;
+        }
         public int GetProductCount()
         {
             return Products.Count;
@@ -98,30 +115,23 @@ namespace VendingMachine.Classes
             return CountOfSugar;
         }
 
-        public bool CheckChange(decimal customerMoney)
+        public virtual bool CheckChange(int choice, decimal customerMoney)
         {
             bool result = false;
-            decimal maxPrice = 0;
+            choice--;
+            decimal itemPrice = Products[choice].Price;
 
-            foreach (var drink in Products)
-            {
-                if (maxPrice < drink.Price)
-                {
-                    maxPrice = drink.Price;
-                }
-            }
-
-            decimal change = customerMoney - maxPrice;
+            decimal change = customerMoney - itemPrice;
 
             if (Balance >= change)
             {
                 result = true;
             }
-
+            Console.WriteLine($"Ожидаемая сдача {change} руб");
             return result;
         }
 
-        private bool GetPaymentCash(Drink sellDrink, decimal customerMoney)
+        protected virtual bool GetPaymentCash(Drink sellDrink, decimal customerMoney)
         {
             bool status = false;
             decimal change = CalculateChange(sellDrink.Price, customerMoney);
@@ -143,7 +153,7 @@ namespace VendingMachine.Classes
             return status;
         }
 
-        private bool GetPaymentCard(Drink sellDrink, decimal customerMoney)
+        protected virtual bool GetPaymentCard(Drink sellDrink, decimal customerMoney)
         {
             bool status = false;
 
@@ -181,7 +191,7 @@ namespace VendingMachine.Classes
         }
 
 
-        private decimal CalculateChange(decimal price, decimal money)
+        protected decimal CalculateChange(decimal price, decimal money)
         {
             decimal change = 0;
             if (money >= price)

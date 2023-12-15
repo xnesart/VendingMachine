@@ -41,7 +41,10 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Classes\Drink.cs" />
-        <Compile Include="Classes\VendingUnit.cs" />
+        <Compile Include="Classes\AbstractVendingUnit.cs" />
+        <Compile Include="Classes\Snack.cs" />
+        <Compile Include="Classes\VendingCoffeeUnit.cs" />
+        <Compile Include="Classes\VendingSnackUnit.cs" />
         <Compile Include="Program.cs"/>
         <Compile Include="Properties\AssemblyInfo.cs"/>
     </ItemGroup>
